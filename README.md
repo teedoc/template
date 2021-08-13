@@ -71,7 +71,7 @@ teedoc build
 
 ### Create a repository based on a template
 
-* Visit [https://github.com/teedoc/teedoc.github.io](https://github.com/teedoc/teedoc.github.io), click `Use this template`
+* Visit [https://github.com/teedoc/template](https://github.com/teedoc/template) or [https://github.com/teedoc/teedoc.github.io](https://github.com/teedoc/teedoc.github.io), click `Use this template`
 
 ![github use template](./assets/github_use_template.jpg)
 
