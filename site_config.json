@@ -8,12 +8,10 @@
     "source": "https://github.com/my_name/my_name.github.io/blob/main",
     "route": {
         "docs": {
-            "/get_started/zh/": "docs/get_started/zh",
-            "/get_started/en/": "docs/get_started/en"
+            "/get_started/zh/": "docs/get_started/zh"
         },
         "pages": {
-            "/": "pages/index/zh",
-            "/en/": "pages/index/en"
+            "/": "pages/index/zh"
         },
         "assets": {
             "/static/": "static",
@@ -21,6 +19,24 @@
         },
         "blog": {
             "/blog/": "blog"
+        }
+    },
+    "translate": {
+        "docs": {
+            "/get_started/zh/": [
+                {
+                    "url": "/get_started/en/",
+                    "src": "docs/get_started/en"
+                }
+            ]
+        },
+        "pages": {
+            "/": [
+                {
+                    "url": "/en/",
+                    "src": "pages/index/en"
+                }
+            ]
         }
     },
     "executable": {
