@@ -1,10 +1,10 @@
 <!DOCTYPE html>
-<html lang="zh-CN"  class=" language_zh "  author="neucrack"  date="2021-03-14" >
+<html lang="en"  class=" md_page "  class="md_page" >
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="keywords" content="第一篇博客, ">
-    <meta name="description" content="teedoc 生成静态博客页面, 第一篇博客">
+    <meta name="keywords" content="">
+    <meta name="description" content="">
     <meta name="generator" content="teedoc">
     <meta name="theme" content="teedoc-plugin-theme-default">
     
@@ -30,12 +30,12 @@
     
     <meta name="blog-generator" content="teedoc-plugin-blog">
     
-    <title>第一篇博客 - mysite</title>
+    <title>no translation - mysite</title>
 </head>
 <body class="type_doc">
     <div id="navbar">
         <div id="navbar_menu">
-            <a class="site_title" href="/">
+            <a class="site_title" href="/en/">
                 
                     <img class="site_logo" src="/static/image/logo.png" alt="my_site logo">
                 
@@ -48,23 +48,26 @@
         <div id="navbar_items">
             <div>
                 <ul id="nav_left">
-<li class=""><a  href="/get_started/zh/">安装使用</a></li>
-<li class="active"><a  href="/blog/">博客</a></li>
+<li class="active"><a  href="/get_started/en/">Install</a></li>
+<li class=""><a  href="/blog/">Blog</a></li>
 </ul>
 
             </div>
             <div>
                 <ul id="nav_right">
 <li class=""><a target="_blank" href="https://github.com/neutree/teedoc">github</a></li>
+<li class="sub_items "><a  href="">Language: English</a><ul><li class="active"><a  href="/get_started/en/">English</a></li>
+<li class=""><a  href="/get_started/zh/">中文 简体</a></li>
+</ul></li>
 </ul>
 
-                <ul class="nav_plugins"><li><a id="themes" class="light"></a></li></ul><ul class="nav_plugins"><li><a id="search"><span class="icon"></span><span class="placeholder">搜索</span>
+                <ul class="nav_plugins"><li><a id="themes" class="light"></a></li></ul><ul class="nav_plugins"><li><a id="search"><span class="icon"></span><span class="placeholder">Search</span>
                             <div id="search_hints">
-                                <span id="search_input_hint">输入关键词，多关键词空格隔开</span>
-                                <span id="search_loading_hint">正在加载，请稍候。。。</span>
-                                <span id="search_download_err_hint">下载文件失败，请刷新重试或检查网络</span>
-                                <span id="search_other_docs_result_hint">来自其它文档的结果</span>
-                                <span id="search_curr_doc_result_hint">当前文档搜索结果</span>
+                                <span id="search_input_hint">Keywords separated by space</span>
+                                <span id="search_loading_hint">Loading, wait please ...</span>
+                                <span id="search_download_err_hint">Download error, please check network and refresh again</span>
+                                <span id="search_other_docs_result_hint">Result from other docs</span>
+                                <span id="search_curr_doc_result_hint">Result from current doc</span>
                             </div></a></li></ul>
             </div>
         </div>
@@ -76,6 +79,7 @@
                     
                 </div>
                 <ul class="">
+<li class="not_active with_link"><a href="/get_started/en/no_translate.html?ref=/get_started/zh/index.html&from=/get_started/en/index.html"><span class="label">Introduction to teedoc</span><span class=""></span></a></li>
 </ul>
 
             </div>
@@ -89,33 +93,27 @@
                 <div id="content_body">
                     <div id="article_head">
                         <div id="article_title">
-                            <h1>第一篇博客</h1>
+                            <h1>no translation</h1>
                         </div>
                         <div id="article_tags">
                             <ul>
-                            
-                                <li>hello</li>
-                            
-                                <li> blog</li>
-                            
-                                <li> teedoc</li>
                             
                             </ul>
                         </div>
                         <div id="article_info">
                         <div id="article_info_left">
                             <span class="article_author">
-                                neucrack
+                                
                             </span>
                             <span class="article_date">
-                                2021-03-14
+                                
                             </span>
                         </div>
                         <div id="article_info_right">
                             
                             <div id="source_link">
-                                <a href="https://github.com/my_name/my_name.github.io/blob/main/blog/category1/hello.md" target="_blank">
-                                    编辑本页
+                                <a href="https://github.com/my_name/my_name.github.io/blob/main/tmp/no_translate.md" target="_blank">
+                                    Edit this page
                                 </a>
                             </div>
                             
@@ -123,15 +121,32 @@
                         </div>
                     </div>
                     <div id="article_content">
-                        <span id="blog_start"></span><p>这是一段测试简介，会显示在列表中，使用<code>&lt;!-- more --&gt;</code>来分隔正文</p>
-<!-- more -->
-
-
-<h2 id="%E6%AD%A3%E6%96%87%E6%A0%87%E9%A2%98%E4%B8%80">正文标题一</h2>
-<p>正文</p>
-<h2 id="%E6%AD%A3%E6%96%87%E6%A0%87%E9%A2%98%E4%BA%8C">正文标题二</h2>
-<p>正文</p>
-
+                        <div id="visit_from"></div>
+<div id="no_translate_hint">This page not translated yet</div>
+<div>
+    <span id="visit_hint">Please visit</span>
+    <a id="translate_src"></a>
+</div><div>
+    <script>
+        function getQueryVariable(variable)
+        {
+            var query = window.location.search.substring(1);
+            var vars = query.split("&");
+            for (var i=0;i<vars.length;i++) {
+                    var pair = vars[i].split("=");
+                    if(pair[0] == variable){return pair[1];}
+            }
+            return(false);
+        }
+        var ref = getQueryVariable("ref");
+        var from = getQueryVariable("from");
+        var link = document.getElementById("translate_src");
+        var fromDis = document.getElementById("visit_from");
+        link.href = ref;
+        link.text = ref;
+        fromDis.innerHTML = from;
+    </script>
+</div>
                     </div>
                 </div>
                 <div id="previous_next">
@@ -156,13 +171,12 @@
         <div id="footer">
             <div id="footer_top">
                 <ul>
-<li><a>链接</a><ul><li><a target="_blank" href="https://teedoc.neucrack.com">使用 teedoc 构建</a></li>
-<li><a  href="/sitemap.xml">网站地图</a></li>
+<li><a>Links</a><ul><li><a target="_blank" href="https://teedoc.neucrack.com">Build with teedoc</a></li>
+<li><a  href="/sitemap.xml">Sitemap</a></li>
 </ul>
 </li>
-<li><a>源码</a><ul><li><a target="_blank" href="https://github.com/neutree/teedoc">github</a></li>
-<li><a target="_blank" href="https://gitee.com/teedoc/teedoc">gitee</a></li>
-<li><a target="_blank" href="https://github.com/teedoc/teedoc.github.io">本网站源文件</a></li>
+<li><a>Source code</a><ul><li><a target="_blank" href="https://github.com/neutree/teedoc">github</a></li>
+<li><a target="_blank" href="https://github.com/teedoc/teedoc.github.io">website source files</a></li>
 </ul>
 </li>
 </ul>

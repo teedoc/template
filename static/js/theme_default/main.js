@@ -12,6 +12,11 @@
 window.onload = function(){
 }
 
+var sleep = function(time) {
+    var startTime = new Date().getTime() + parseInt(time, 10);
+    while(new Date().getTime() < startTime) {}
+};
+
 $(document).ready(function(){
     $("#sidebar ul .show").slideDown(200);
     registerSidebarClick();
@@ -21,9 +26,13 @@ $(document).ready(function(){
         addSplitter();
         focusSidebar();
     }
+    addAnchor();
     registerOnWindowResize(has_sidebar);
     hello();
     imageViewer();
+    if(true){
+        addPrintPage();
+    }
 });
 
 var sidebar_width = "300px";
@@ -41,6 +50,31 @@ try{
     }
 }catch(err){
     alert('plugin theme env sidebar_width value error, e.g. 300 or "300px" or "30%", not ' + sidebar_width);
+}
+
+function menu_show(show)
+{
+    if(show){
+        $("#menu").addClass("m_menu_fixed");
+        $("#menu").addClass("close");
+        $("#to_top").addClass("m_hide");
+        $("#sidebar_wrapper").show(100);
+        $(".gutter").css("display", "block");
+    }else{
+        $("#menu").removeClass("m_menu_fixed");
+        $("#menu").removeClass("close");
+        $("#to_top").removeClass("m_hide");
+        $("#sidebar_wrapper").hide(100);
+        $(".gutter").css("display", "none");
+        $("#article").css("width", "100%"); // recover set by splitter
+    }
+}
+function menu_toggle(){
+    if(!$("#sidebar_wrapper").is(':visible')){ // show
+        menu_show(true);
+    }else{ // hide
+        menu_show(false);
+    }
 }
 
 function registerSidebarClick(){
@@ -72,19 +106,7 @@ function registerSidebarClick(){
         }
     });
     $("#menu").bind("click", function(e){
-        if(!$("#sidebar_wrapper").is(':visible')){ // show
-            $("#menu").addClass("m_menu_fixed");
-            $("#menu").addClass("close");
-            $("#to_top").addClass("m_hide");
-            $("#sidebar_wrapper").show(100);
-            $(".gutter").css("display", "block");
-        }else{ // hide
-            $("#menu").removeClass("m_menu_fixed");
-            $("#menu").removeClass("close");
-            $("#to_top").removeClass("m_hide");
-            $("#sidebar_wrapper").hide(100);
-            $(".gutter").css("display", "none");
-        }
+        menu_toggle();
     });
     $("#navbar_menu_btn").bind("click", function(e){
         $("#navbar_items").toggle();
@@ -173,7 +195,7 @@ var hasSplitter = false;
 
 function createSplitter(){
     var split = Split(["#sidebar_wrapper", "#article"],{
-        gutterSize: 10,
+        gutterSize: 3,
         gutterAlign: 'start',
         minSize: 200,
         elementStyle: function (dimension, size, gutterSize) {
@@ -197,10 +219,13 @@ function createSplitter(){
     }
     }
     split.setSizes([split_w, 100 - split_w]);
+    $(".gutter").append('<div class="gutter_icon"></div>');
     $(".gutter").hover(function(){
-    $(".gutter").css("width", "18px");
+        $(".gutter").css("width", "10px");
+        $(".gutter_icon").css("width", "10px");
     },function(){
-    $(".gutter").css("width", "10px");
+        $(".gutter").css("width", "3px");
+        $(".gutter_icon").css("width", "3px");
     });
 }
 
@@ -239,6 +264,8 @@ function registerOnWindowResize(has_sidebar){
 function focusSidebar(){
     var windowH = window.innerHeight;
     var active = $("#sidebar .active")[0];
+    if(!active)
+        return;
     var offset = active.offsetTop;
     if(offset > windowH/2){
         $("#sidebar .show").scrollTop(offset);
@@ -253,3 +280,46 @@ function imageViewer(){
     const gallery = new Viewer(content_e);
 }
 
+function addAnchor(){
+    $("#content_body h2, #content_body h3, #content_body h4, #content_body h5").each(function(){
+        if($(this).attr("id")){
+            $(this).append('<a class="anchor" href="#'+ $(this).attr("id") +'">#</a>');
+        }
+    });
+}
+
+function rerender(){
+    Prism.highlightAll();
+}
+
+function addPrintPage(){
+    if(!$("#article_info_right")){
+        return;
+    }
+    $("#article_info_right").append('<div id="print_page"></div>');
+
+    var beforePrint = function(){
+        // update style changed by js:
+        $("#article").css("width", "100%");
+        // rerender for proper output
+        rerender();
+    }
+    var afterPrint = function() {
+        // location.reload();
+    }
+    if (window.matchMedia) {
+        var mediaQueryList = window.matchMedia('print'); 
+        mediaQueryList.addListener(function(mql) {
+            if (mql.matches) {
+                beforePrint();
+            } else {
+                afterPrint();
+            }
+        });
+    }
+    window.onbeforeprint = beforePrint;
+    window.onafterprint = afterPrint;
+    $("#print_page").click(function(){
+        window.print();
+    });
+}
