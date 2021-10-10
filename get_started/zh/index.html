@@ -37,8 +37,6 @@
         <div id="navbar_menu">
             <a class="site_title" href="/">
                 
-                    <img class="site_logo" src="/static/image/logo.png" alt="my_site logo">
-                
                 
                     <h2>my_site</h2>
                 
@@ -121,8 +119,20 @@
                         </div>
                     </div>
                     <div id="article_content">
-                        <p>更多请详细查看文档: <a href="https://teedoc.neucrack.com/">teedoc.neucrack.com</a> 或 <a href="https://teedoc.github.io/">teedoc.github.io</a></p>
-<p>另外也可以参考官网文档源码的写法: <a href="https://github.com/teedoc/teedoc.github.io">github.com/teedoc/teedoc.github.io</a></p>
+                        <h2 id="%E6%B7%BB%E5%8A%A0%E6%96%87%E7%AB%A0">添加文章</h2>
+<ul>
+<li>在本文件所在目录创建 markdown 以  <code>.md</code> 结尾的文件，比如 <code>first.md</code></li>
+<li>在 <code>sidebar.yaml</code> 中添加侧边栏链接</li>
+</ul>
+<pre><code class="lang-markdown">items:
+-   label: Brief
+    file: README.md
+-   label: First
+    file: first.md
+</code></pre>
+<h2 id="%E6%9B%B4%E5%A4%9A%E4%BE%8B%E5%AD%90">更多例子</h2>
+<p>更多请访问: <a href="https://teedoc.neucrack.com/">teedoc.neucrack.com</a> 或者 <a href="https://teedoc.github.io/">teedoc.github.io</a></p>
+<p>更多例子访问: <a href="https://github.com/teedoc/teedoc.github.io">github.com/teedoc/teedoc.github.io</a> 或者 <a href="https://github.com/teedoc/template">https://github.com/teedoc/template</a> , 或 <a href="https://github.com/sipeed/sipeed_wiki">sipeed wiki</a></p>
 
                     </div>
                 </div>

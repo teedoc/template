@@ -133,6 +133,7 @@ code {
     transition: 0.2s;
     padding: 1em;
     cursor: pointer;
+    transition: 0.2s;
     background: #4caf7d;
 }
 .btn:hover,

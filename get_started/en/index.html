@@ -37,8 +37,6 @@
         <div id="navbar_menu">
             <a class="site_title" href="/en/">
                 
-                    <img class="site_logo" src="/static/image/logo.png" alt="my_site logo">
-                
                 
                     <h2>my_site</h2>
                 
@@ -121,8 +119,20 @@
                         </div>
                     </div>
                     <div id="article_content">
-                        <p>Please read document at Official website: <a href="https://teedoc.neucrack.com/">teedoc.neucrack.com</a> or <a href="https://teedoc.github.io/">teedoc.github.io</a></p>
-<p>And refer to source file of official site: <a href="https://github.com/teedoc/teedoc.github.io">github.com/teedoc/teedoc.github.io</a></p>
+                        <h2 id="Add-article">Add article</h2>
+<ul>
+<li>Create markdown file with file name end with <code>.md</code> in the directory of this file, e.g. <code>first.md</code></li>
+<li>Add link in <code>sidebar.yaml</code></li>
+</ul>
+<pre><code class="lang-markdown">items:
+-   label: Brief
+    file: README.md
+-   label: First
+    file: first.md
+</code></pre>
+<h2 id="More-example">More example</h2>
+<p>More visit: <a href="https://teedoc.neucrack.com/">teedoc.neucrack.com</a> or <a href="https://teedoc.github.io/">teedoc.github.io</a></p>
+<p>And more example see: <a href="https://github.com/teedoc/teedoc.github.io">github.com/teedoc/teedoc.github.io</a> and <a href="https://github.com/teedoc/template">https://github.com/teedoc/template</a> , and <a href="https://github.com/sipeed/sipeed_wiki">sipeed wiki</a></p>
 
                     </div>
                 </div>
