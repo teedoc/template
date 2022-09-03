@@ -2,6 +2,7 @@
 title: Article title
 keywords: keyword1, keyword2
 desc: article description
+date: 2022-09-01
 ---
 
 ## Add article
