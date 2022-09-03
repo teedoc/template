@@ -10,6 +10,12 @@
     
     <meta name="markdown-generator" content="teedoc-plugin-markdown-parser">
     
+    <script>
+MathJax = {"loader": {"load": ["output/svg"]}, "tex": {"inlineMath": [["$", "$"], ["\\(", "\\)"]]}, "svg": {"fontCache": "global"}};
+</script>
+    
+    <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    
     <link rel="stylesheet" href="/static/css/theme_default/prism.min.css" type="text/css"/>
     
     <link rel="stylesheet" href="/static/css/theme_default/viewer.min.css" type="text/css"/>
@@ -31,11 +37,14 @@
     <link rel="stylesheet" href="/static/css/custom.css" type="text/css"/>
     
     <title>第一篇博客 - mysite</title>
+    <script type="text/javascript">js_vars = {}</script>
 </head>
 <body class="type_doc">
     <div id="navbar">
         <div id="navbar_menu">
             <a class="site_title" href="/">
+                
+                    <img class="site_logo" src="/static/image/logo.png" alt="my_site logo">
                 
                 
                     <h2>my_site</h2>
@@ -105,9 +114,11 @@
                             <span class="article_author">
                                 neucrack
                             </span>
-                            <span class="article_date">
-                                2021-03-14
-                            </span>
+                            
+                                <span class="article_date" title="最后修改日期： 2021-03-14">
+                                    2021-03-14
+                                </span>
+                            
                         </div>
                         <div id="article_info_right">
                             
@@ -120,11 +131,13 @@
                         </div>
                         </div>
                     </div>
+                    <div id="article_tools">
+                        <span></span>
+                        <span id="toc_btn"></span>
+                    </div>
                     <div id="article_content">
                         <span id="blog_start"></span><p>这是一段测试简介，会显示在列表中，使用<code>&lt;!-- more --&gt;</code>来分隔正文</p>
 <!-- more -->
-
-
 <h2 id="%E6%AD%A3%E6%96%87%E6%A0%87%E9%A2%98%E4%B8%80">正文标题一</h2>
 <p>正文</p>
 <h2 id="%E6%AD%A3%E6%96%87%E6%A0%87%E9%A2%98%E4%BA%8C">正文标题二</h2>
@@ -142,9 +155,11 @@
                 </div>
                 <div id="comments-container"></div>
             </div>
-            <div id="toc">
-                <div id="toc_content">
-                        
+            <div id="toc_wrapper">
+                <div id="toc">
+                    <div id="toc_content">
+                            
+                    </div>
                 </div>
             </div>
         </div>
@@ -175,6 +190,10 @@
             </div>
         </div>
     </div>
+    
+        <script src="/teedoc-plugin-markdown-parser/mermaid.min.js"></script>
+    
+        <script>mermaid.initialize({startOnLoad:true});</script>
     
         <script src="/static/js/theme_default/tocbot.min.js"></script>
     

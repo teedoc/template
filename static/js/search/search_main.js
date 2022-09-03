@@ -6,7 +6,7 @@ jQuery.fn.highlight = function (pat) {
             var pos = node.data.toUpperCase().indexOf(pat);
             if (pos >= 0) {
                 var spannode = document.createElement('span');
-                spannode.className = 'highlight';
+                spannode.className = 'search_highlight';
                 var middlebit = node.splitText(pos);
                 var endbit = middlebit.splitText(pat.length);
                 var middleclone = middlebit.cloneNode(true);
@@ -197,9 +197,14 @@ $(document).ready(function(){
     highlightKeywords();
 });
 
-function focusItems(id, contrainerId, offset=0){
-    console.log(contrainerId, id,  $("#"+id).offset().top, offset);
-    var elementTop = $("#"+id)[0].offsetTop - offset;
+function focusItems(id, contrainerId, offset=0, classname=null){
+    var elementTop = 0;
+    if(classname){
+        elementTop = $("."+classname)[0].offsetTop - offset;
+    }else{
+        elementTop = $("#"+id)[0].offsetTop - offset;
+    }
+    
     $("#"+contrainerId).animate({scrollTop: elementTop},500);
 }
 
@@ -214,12 +219,73 @@ function addSearchResultClickListener(){
 function highlightKeywords(){
     var highlight_keywords = getQueryVariable("highlight");
     if(highlight_keywords){
+        // add search result btn
+        var html = document.getElementsByTagName("html")[0];
+        var lang = html.lang.split("-")[0].toLowerCase()
+        let strs = {
+            "zh": {
+                "Previous": "上一个",
+                "Next": "下一个"
+            }
+        }
+        if(lang in strs){
+            var pre_name = strs[lang]["Previous"];
+            var next_name = strs[lang]["Next"];
+        }else{
+            var pre_name = "Previous";
+            var next_name = "Next";
+        }
+        $("body").append('<div id="search_ctrl_btn">' +
+            '<div class="previous"><span class="icon"></span><span>'+ pre_name +'</span></div>' + 
+            '<div id="remove_search"><span class="icon"></span></div>' +
+            '<div class="next"><span>' + next_name +'</span><span class="icon"></span></div>' + 
+            '</div>');
         var highlight_keywords = decodeURI(highlight_keywords);
         highlight_keywords = highlight_keywords.split(" ");
         for(var i=0; i<highlight_keywords.length; ++i){
             console.log(highlight_keywords[i]);
             $('#content_body').highlight(highlight_keywords[i]);
         }
+        if($(".search_highlight").length <= 0){
+            return;
+        }
+        window.scrollTo({
+            top: $(".search_highlight")[0].offsetTop - window.screen.height / 3,
+            behavior: "smooth" 
+        });
+        $($(".search_highlight")[0]).addClass("selected_highlight")
+        $("#remove_search").on("click", function(){
+            $('.search_highlight').removeClass("search_highlight");
+            $('.selected_highlight').removeClass("selected_highlight");
+            $("#search_ctrl_btn").hide();
+        });
+        var currSearchIdx = 0
+        $("#search_ctrl_btn > .previous").on("click", function(){
+            let old = currSearchIdx;
+            currSearchIdx -= 1;
+            if (currSearchIdx < 0){
+                currSearchIdx = $(".search_highlight").length - 1;
+            }
+            window.scrollTo({
+                top: $(".search_highlight")[currSearchIdx].offsetTop - window.screen.height / 3,
+                behavior: "smooth" 
+            });
+            $($(".search_highlight")[old]).removeClass("selected_highlight")
+            $($(".search_highlight")[currSearchIdx]).addClass("selected_highlight")
+        });
+        $("#search_ctrl_btn > .next").on("click", function(){
+            let old = currSearchIdx;
+            currSearchIdx += 1;
+            if (currSearchIdx >= $(".search_highlight").length){
+                currSearchIdx = 0;
+            }
+            window.scrollTo({
+                top: $(".search_highlight")[currSearchIdx].offsetTop - window.screen.height / 3,
+                behavior: "smooth" 
+            });
+            $($(".search_highlight")[old]).removeClass("selected_highlight")
+            $($(".search_highlight")[currSearchIdx]).addClass("selected_highlight")
+        });
     }
 }
 function getQueryVariable(variable)
@@ -262,11 +328,11 @@ function search(keywords, content, show_length = 15){
         var len = idxs[i]['len'];
 
         if(idx_last >= 0 && (idx - idx_last -len_last) < show_length){ // last keyword too close
-            find_strs += content.substr(idx_last + len_last, idx - (idx_last + len_last)) + '<code class="highlight">'+ content.substr(idx, len) +'</code>'
+            find_strs += content.substr(idx_last + len_last, idx - (idx_last + len_last)) + '<code class="search_highlight">'+ content.substr(idx, len) +'</code>'
         }else{
             var start_idx = (idx - show_length < 0) ? 0 : (idx - show_length);
             find_strs += '...' + content.substr(start_idx,  idx - start_idx) +
-                '<code class="highlight">' + content.substr(idx,  len) + 
+                '<code class="search_highlight">' + content.substr(idx,  len) + 
                 '</code>';
         }
         var idx_next = -1;

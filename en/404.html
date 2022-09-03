@@ -11,7 +11,9 @@
         <meta name="theme" content="teedoc-plugin-theme-default">
     
      
-        <meta name="markdown-generator" content="teedoc-plugin-markdown-parser"><link rel="stylesheet" href="/static/css/theme_default/prism.min.css" type="text/css"/><link rel="stylesheet" href="/static/css/theme_default/viewer.min.css" type="text/css"/><link rel="stylesheet" href="/static/css/theme_default/dark.css" type="text/css"/><link rel="stylesheet" href="/static/css/theme_default/light.css" type="text/css"/><script src="/static/js/theme_default/split.js"></script><script src="/static/js/theme_default/jquery.min.js"></script><script src="/static/js/theme_default/pre_main.js"></script><link rel="stylesheet" href="/static/css/search/style.css" type="text/css"/><meta name="blog-generator" content="teedoc-plugin-blog"><link rel="stylesheet" href="/static/css/custom.css" type="text/css"/>
+        <meta name="markdown-generator" content="teedoc-plugin-markdown-parser"><script>
+MathJax = {"loader": {"load": ["output/svg"]}, "tex": {"inlineMath": [["$", "$"], ["\\(", "\\)"]]}, "svg": {"fontCache": "global"}};
+</script><script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script><link rel="stylesheet" href="/static/css/theme_default/prism.min.css" type="text/css"/><link rel="stylesheet" href="/static/css/theme_default/viewer.min.css" type="text/css"/><link rel="stylesheet" href="/static/css/theme_default/dark.css" type="text/css"/><link rel="stylesheet" href="/static/css/theme_default/light.css" type="text/css"/><script src="/static/js/theme_default/split.js"></script><script src="/static/js/theme_default/jquery.min.js"></script><script src="/static/js/theme_default/pre_main.js"></script><link rel="stylesheet" href="/static/css/search/style.css" type="text/css"/><meta name="blog-generator" content="teedoc-plugin-blog"><link rel="stylesheet" href="/static/css/custom.css" type="text/css"/>
     
     
     <title>404Page not found - mysite</title>
@@ -28,7 +30,7 @@
       }
       return(false);
   }
-  var jump = getQueryVariable("404Jump");
+  var jump = getQueryVariable("jump");
   var from = getQueryVariable("from");
   var pageLang = a=document.getElementsByTagName("html")[0].lang.toLowerCase(); // en -> zh-cn
   var browerLang =(navigator.language || navigator.browserLanguage).toLowerCase();    // zh-cn
@@ -38,29 +40,38 @@
   if(pageLang && browerLang!=pageLang){
     var idx = browerLang.indexOf("-");
     if(!jump){
-      if(idx > 0){ // zh-cn, jump to /zh_CN/404.html?404Jump=1
-        var url = "/" + browerLang.substr(0, idx) + "_" + browerLang.substr(idx + 1).toUpperCase() + "/404.html?404Jump=1&from="+from;
+      if(idx > 0){ // zh-cn, jump to /zh_CN/404.html?jump=1
+        var url = "/" + browerLang.substr(0, idx) + "_" + browerLang.substr(idx + 1).toUpperCase() + "/404.html?jump=1&from="+from;
         window.location.href=url;
-      }else{       // /zh/404.html?404Jump=3
-        var url = "/" + browerLang + "/404.html?404Jump=3&from="+from;
+      }else{       // /zh/404.html?jump=5
+        var url = "/" + browerLang + "/404.html?jump=5&from="+from;
         window.location.href=url;
       }
-    }else if(jump == "1"){ // /zh-CN/404.html?404Jump=2
-      var url = "/" + browerLang.substr(0, idx) + "-" + browerLang.substr(idx + 1).toUpperCase() + "/404.html?404Jump=2&from="+from;
+    }else if(jump == "1"){ // /zh-CN/404.html?jump=2
+      var url = "/" + browerLang.substr(0, idx) + "-" + browerLang.substr(idx + 1).toUpperCase() + "/404.html?jump=2&from="+from;
       window.location.href=url;
-    }else if(jump == "2"){ // /zh/404.html?404Jump=3
-      var url = "/" + browerLang.substr(0, idx) + "/404.html?404Jump=3&from="+from;
+    }else if(jump == "2"){ // /zh-cn/404.html?jump=3
+      var url = "/" + browerLang.substr(0, idx) + "-" + browerLang.substr(idx + 1).toLowerCase() + "/404.html?jump=3&from="+from;
+      window.location.href=url;
+    }else if(jump == "3"){ // /zh_cn/404.html?jump=4
+      var url = "/" + browerLang.substr(0, idx) + "_" + browerLang.substr(idx + 1).toLowerCase() + "/404.html?jump=4&from="+from;
+      window.location.href=url;
+    }else if(jump == "4"){ // /zh/404.html?jump=5
+      var url = "/" + browerLang.substr(0, idx) + "/404.html?jump=5&from="+from;
       window.location.href=url;
     }
   }
 </script>
 
+    <script type="text/javascript">js_vars = {}</script>
 </head>
 <body class="type_page">
     
     <div id="navbar">
         <div id="navbar_menu">
             <a class="site_title" href="/en/">
+                
+                    <img class="site_logo" src="/static/image/logo.png" alt="my_site logo">
                 
                 
                     <h2>my_site</h2>
@@ -153,6 +164,10 @@
     </div>
 
     
+    
+        <script src="/teedoc-plugin-markdown-parser/mermaid.min.js"></script>
+    
+        <script>mermaid.initialize({startOnLoad:true});</script>
     
         <script src="/static/js/theme_default/tocbot.min.js"></script>
     

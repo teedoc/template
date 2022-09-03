@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en"  class="" >
+<html lang="en"  class=""  date="2022-09-01" >
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -9,6 +9,12 @@
     <meta name="theme" content="teedoc-plugin-theme-default">
     
     <meta name="markdown-generator" content="teedoc-plugin-markdown-parser">
+    
+    <script>
+MathJax = {"loader": {"load": ["output/svg"]}, "tex": {"inlineMath": [["$", "$"], ["\\(", "\\)"]]}, "svg": {"fontCache": "global"}};
+</script>
+    
+    <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
     
     <link rel="stylesheet" href="/static/css/theme_default/prism.min.css" type="text/css"/>
     
@@ -31,11 +37,14 @@
     <link rel="stylesheet" href="/static/css/custom.css" type="text/css"/>
     
     <title>Article title - mysite</title>
+    <script type="text/javascript">js_vars = {}</script>
 </head>
 <body class="type_doc">
     <div id="navbar">
         <div id="navbar_menu">
             <a class="site_title" href="/en/">
+                
+                    <img class="site_logo" src="/static/image/logo.png" alt="my_site logo">
                 
                 
                     <h2>my_site</h2>
@@ -103,9 +112,11 @@
                             <span class="article_author">
                                 
                             </span>
-                            <span class="article_date">
-                                
-                            </span>
+                            
+                                <span class="article_date" title="Last modify date: 2022-09-01">
+                                    2022-09-01
+                                </span>
+                            
                         </div>
                         <div id="article_info_right">
                             
@@ -118,21 +129,26 @@
                         </div>
                         </div>
                     </div>
+                    <div id="article_tools">
+                        <span></span>
+                        <span id="toc_btn"></span>
+                    </div>
                     <div id="article_content">
                         <h2 id="Add-article">Add article</h2>
 <ul>
 <li>Create markdown file with file name end with <code>.md</code> in the directory of this file, e.g. <code>first.md</code></li>
 <li>Add link in <code>sidebar.yaml</code></li>
 </ul>
-<pre><code class="lang-markdown">items:
+
+<pre class="language-markdown"><code class="language-markdown">items:
 -   label: Brief
     file: README.md
 -   label: First
     file: first.md
 </code></pre>
 <h2 id="More-example">More example</h2>
-<p>More visit: <a href="https://teedoc.neucrack.com/">teedoc.neucrack.com</a> or <a href="https://teedoc.github.io/">teedoc.github.io</a></p>
-<p>And more example see: <a href="https://github.com/teedoc/teedoc.github.io">github.com/teedoc/teedoc.github.io</a> and <a href="https://github.com/teedoc/template">https://github.com/teedoc/template</a> , and <a href="https://github.com/sipeed/sipeed_wiki">sipeed wiki</a></p>
+<p>More visit: <a href="https://teedoc.neucrack.com/"  target="_blank">teedoc.neucrack.com</a> or <a href="https://teedoc.github.io/"  target="_blank">teedoc.github.io</a></p>
+<p>And more example see: <a href="https://github.com/teedoc/teedoc.github.io"  target="_blank">github.com/teedoc/teedoc.github.io</a> and <a href="https://github.com/teedoc/template"  target="_blank">https://github.com/teedoc/template</a> , and <a href="https://github.com/sipeed/sipeed_wiki"  target="_blank">sipeed wiki</a></p>
 
                     </div>
                 </div>
@@ -146,9 +162,11 @@
                 </div>
                 <div id="comments-container"></div>
             </div>
-            <div id="toc">
-                <div id="toc_content">
-                        
+            <div id="toc_wrapper">
+                <div id="toc">
+                    <div id="toc_content">
+                            
+                    </div>
                 </div>
             </div>
         </div>
@@ -178,6 +196,10 @@
             </div>
         </div>
     </div>
+    
+        <script src="/teedoc-plugin-markdown-parser/mermaid.min.js"></script>
+    
+        <script>mermaid.initialize({startOnLoad:true});</script>
     
         <script src="/static/js/theme_default/tocbot.min.js"></script>
     

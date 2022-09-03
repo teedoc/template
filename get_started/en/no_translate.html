@@ -10,6 +10,12 @@
     
     <meta name="markdown-generator" content="teedoc-plugin-markdown-parser">
     
+    <script>
+MathJax = {"loader": {"load": ["output/svg"]}, "tex": {"inlineMath": [["$", "$"], ["\\(", "\\)"]]}, "svg": {"fontCache": "global"}};
+</script>
+    
+    <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    
     <link rel="stylesheet" href="/static/css/theme_default/prism.min.css" type="text/css"/>
     
     <link rel="stylesheet" href="/static/css/theme_default/viewer.min.css" type="text/css"/>
@@ -31,11 +37,14 @@
     <link rel="stylesheet" href="/static/css/custom.css" type="text/css"/>
     
     <title>no translation - mysite</title>
+    <script type="text/javascript">js_vars = {}</script>
 </head>
 <body class="type_doc">
     <div id="navbar">
         <div id="navbar_menu">
             <a class="site_title" href="/en/">
+                
+                    <img class="site_logo" src="/static/image/logo.png" alt="my_site logo">
                 
                 
                     <h2>my_site</h2>
@@ -77,7 +86,7 @@
                     
                 </div>
                 <ul class="">
-<li class="not_active with_link"><a href="/get_started/en/no_translate.html?ref=/get_started/zh/index.html&from=/get_started/en/index.html"><span class="label">Introduction to teedoc</span><span class=""></span></a></li>
+<li class="not_active with_link"><a href="/get_started/en/index.html"><span class="label">Introduction to teedoc</span><span class=""></span></a></li>
 </ul>
 
             </div>
@@ -103,9 +112,7 @@
                             <span class="article_author">
                                 
                             </span>
-                            <span class="article_date">
-                                
-                            </span>
+                            
                         </div>
                         <div id="article_info_right">
                             
@@ -118,13 +125,18 @@
                         </div>
                         </div>
                     </div>
+                    <div id="article_tools">
+                        <span></span>
+                        <span id="toc_btn"></span>
+                    </div>
                     <div id="article_content">
                         <div id="visit_from"></div>
 <div id="no_translate_hint">This page not translated yet</div>
 <div>
     <span id="visit_hint">Please visit</span>
     <a id="translate_src"></a>
-</div><div>
+</div>
+<div>
     <script>
         function getQueryVariable(variable)
         {
@@ -145,6 +157,7 @@
         fromDis.innerHTML = from;
     </script>
 </div>
+
                     </div>
                 </div>
                 <div id="previous_next">
@@ -157,9 +170,11 @@
                 </div>
                 <div id="comments-container"></div>
             </div>
-            <div id="toc">
-                <div id="toc_content">
-                        
+            <div id="toc_wrapper">
+                <div id="toc">
+                    <div id="toc_content">
+                            
+                    </div>
                 </div>
             </div>
         </div>
@@ -189,6 +204,10 @@
             </div>
         </div>
     </div>
+    
+        <script src="/teedoc-plugin-markdown-parser/mermaid.min.js"></script>
+    
+        <script>mermaid.initialize({startOnLoad:true});</script>
     
         <script src="/static/js/theme_default/tocbot.min.js"></script>
     

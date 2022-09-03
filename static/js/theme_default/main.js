@@ -21,6 +21,7 @@ $(document).ready(function(){
     $("#sidebar ul .show").slideDown(200);
     registerSidebarClick();
     addTOC();
+    addSequence();
     var has_sidebar = document.getElementById("sidebar_wrapper");
     if(has_sidebar){
         addSplitter();
@@ -33,6 +34,7 @@ $(document).ready(function(){
     if(true){
         addPrintPage();
     }
+    addTocMobileListener();
 });
 
 var sidebar_width = "300px";
@@ -55,13 +57,14 @@ try{
 function menu_show(show)
 {
     if(show){
-        $("#menu").addClass("m_menu_fixed");
+        $("#menu_wrapper").addClass("m_menu_fixed");
         $("#menu").addClass("close");
         $("#to_top").addClass("m_hide");
         $("#sidebar_wrapper").show(100);
         $(".gutter").css("display", "block");
+        focusSidebar();
     }else{
-        $("#menu").removeClass("m_menu_fixed");
+        $("#menu_wrapper").removeClass("m_menu_fixed");
         $("#menu").removeClass("close");
         $("#to_top").removeClass("m_hide");
         $("#sidebar_wrapper").hide(100);
@@ -93,18 +96,6 @@ function registerSidebarClick(){
             a_obj.children(".sub_indicator").addClass("sub_indicator_collapsed");
         }
     }
-    $("#sidebar ul li > a").bind("click", function(e){
-        var is_click_indicator = $(e.target).hasClass("sub_indicator");
-        var a_obj = $(this);
-        if(a_obj.attr("href") == window.location.pathname){
-            show_collapse_item(a_obj);
-            return false;
-        }
-        show_collapse_item(a_obj);
-        if(is_click_indicator){ // click indicator, only collapse, not jump to link
-            return false;
-        }
-    });
     $("#menu").bind("click", function(e){
         menu_toggle();
     });
@@ -128,6 +119,39 @@ function registerSidebarClick(){
                         });
         return false;
     });
+    $("#sidebar ul li > a").bind("click", function(e){
+        var is_click_indicator = $(e.target).hasClass("sub_indicator");
+        var a_obj = $(this);
+        if(a_obj.attr("href") == window.location.pathname){
+            show_collapse_item(a_obj);
+            return false;
+        }
+        show_collapse_item(a_obj);
+        if(is_click_indicator){ // click indicator, only collapse, not jump to link
+            return false;
+        }
+        var screenW = $(window).width();
+        if(screenW > 900){
+            return;
+        }
+        link_href = $(this).attr("href").split(location.host);
+        if(link_href.length > 1){
+            link_href = link_href[1];
+        }else{
+            link_href = link_href[0];
+        }
+        url_href = location.href.split(location.host)[1]
+        let link_url = link_href.split("#")[0];
+        let sub = $(this).next();
+        var haveSub = false;
+        if(sub && sub.prop("nodeName")){
+            haveSub = sub.prop("nodeName").toLowerCase() == "ul";
+        }
+        if((link_href != decodeURIComponent(url_href) || !haveSub) && location.pathname == link_url){ // current page, and jump to header, close sidebar
+            location.href = link_href;
+            menu_toggle();
+        }
+    });
 }
 
 function hello(){
@@ -148,18 +172,91 @@ function hello(){
 
 
 function addTOC(){
+    if(!document.getElementById("toc_content"))
+        return;
     tocbot.init({
         // Where to render the table of contents.
         tocSelector: '#toc_content',
         // Where to grab the headings to build the table of contents.
-        contentSelector: '#content_body',
+        contentSelector: '#article_content',
         // Which headings to grab inside of the contentSelector element.
-        headingSelector: 'h2, h3, h4',
+        headingSelector: 'h1, h2, h3, h4',
         // For headings inside relative or absolute positioned containers within content.
         hasInnerContainers: true,
         });
 }
 
+function toChineseNumber(n) {
+    if (!Number.isInteger(n) && n < 0) {
+      throw Error('请输入自然数');
+    }
+
+    const digits = ['零', '一', '二', '三', '四', '五', '六', '七', '八', '九'];
+    const positions = ['', '十', '百', '千', '万', '十万', '百万', '千万', '亿', '十亿', '百亿', '千亿'];
+    const charArray = String(n).split('');
+    let result = '';
+    let prevIsZero = false;
+    //处理0  deal zero
+    for (let i = 0; i < charArray.length; i++) {
+      const ch = charArray[i];
+      if (ch !== '0' && !prevIsZero) {
+        result += digits[parseInt(ch)] + positions[charArray.length - i - 1];
+      } else if (ch === '0') {
+        prevIsZero = true;
+      } else if (ch !== '0' && prevIsZero) {
+        result += '零' + digits[parseInt(ch)] + positions[charArray.length - i - 1];
+      }
+    }
+    //处理十 deal ten
+    if (n < 100) {
+      result = result.replace('一十', '十');
+    }
+    return result;
+  }
+
+function addSequence(){
+    if(!tocbot._parseContent){
+        return;
+    }
+    var headings = tocbot._parseContent.selectHeadings(document.getElementById("article_content"), tocbot.options.headingSelector);
+    var counth2=0, counth3=0, counth4=0;
+    var html = document.getElementsByTagName("html")[0];
+    var isZh = html.lang.substring(0, 2).toLowerCase() == "zh";
+    for(var i=0; i<html.classList.length; ++i){
+        if(html.classList[i] == "heading_no_counter"){
+            return;
+        }
+    }
+
+    var headerJoiner = ".";
+
+    for(var i=0; i<headings.length; ++i){
+        var headerEnd = ". ";
+        if(headings[i].tagName == "H1"){
+            counth2 = 0;
+            continue;
+        }
+
+        if(headings[i].tagName == "H2"){
+            counth2 += 1;
+            counth3 = 0;
+            var counts = [counth2];
+            if (isZh){
+                var counts = counts.map(toChineseNumber);
+                headerEnd = "、";
+            }
+        } else if(headings[i].tagName == "H3"){
+            counth3 += 1;
+            counth4 = 0;
+            var counts = [counth2, counth3];
+        } else if(headings[i].tagName == "H4"){
+            counth4 += 1;
+            var counts = [counth2, counth3, counth4];
+        }
+        var seq = counts.join(headerJoiner) + headerEnd
+        headings[i].insertAdjacentHTML('afterbegin', '<span class="sequence">' + seq + '</span>');
+    }
+}
 
 
 function getSplitter(){
@@ -244,12 +341,12 @@ function registerOnWindowResize(has_sidebar){
             return;
         }
         if(screenW < 900){
-            console.log($("#sidebar_wrapper").attr("style"));
             $("#sidebar_wrapper").removeAttr("style");
             if($("#menu").hasClass("close")){
                 $("#sidebar_wrapper").css("display", "block");    
             }
             $(".gutter").css("display", "none");
+            $("#article").css("width", "100%");
         }else{
             if(!hasSplitter){
                 createSplitter();
@@ -323,3 +420,19 @@ function addPrintPage(){
         window.print();
     });
 }
+
+function addTocMobileListener(){
+    $("#toc_btn").click(function(){
+        if($("#toc_wrapper").hasClass("show")){
+            $("#toc_wrapper").removeClass("show");
+        }else{
+            $("#toc_wrapper").addClass("show");
+        }
+    });
+    $("#toc_wrapper").click(function(){
+        if($("#toc_btn").is(":visible")){
+            $("#toc_wrapper").removeClass("show");
+        }
+    });
+}
+
