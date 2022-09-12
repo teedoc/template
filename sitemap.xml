@@ -2,19 +2,19 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.sitemaps.org/schemas/sitemap/0.9 http://www.sitemaps.org/schemas/sitemap/0.9/sitemap.xsd">
     <url>
             <loc>https://my_name.github.io/get_started/zh/index.html</loc>
-            <lastmod>2022-09-03T07:46:35.281888</lastmod>
+            <lastmod>2022-09-01T00:00:00</lastmod>
             <changefreq>weekly</changefreq>
             <priority>1.0</priority>
         </url>
         <url>
             <loc>https://my_name.github.io/get_started/en/index.html</loc>
-            <lastmod>2022-09-03T07:46:35.277888</lastmod>
+            <lastmod>2022-09-01T00:00:00</lastmod>
             <changefreq>weekly</changefreq>
             <priority>1.0</priority>
         </url>
         <url>
             <loc>https://my_name.github.io/get_started/en/no_translate.html</loc>
-            <lastmod>2022-09-03T07:46:54.718277</lastmod>
+            <lastmod>2022-09-12T00:00:00</lastmod>
             <changefreq>weekly</changefreq>
             <priority>1.0</priority>
         </url>
