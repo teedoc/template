@@ -55,7 +55,7 @@ p {
     line-height: 2em;
 }
 blockquote {
-    border-left: 4px solid #46c19d;
+    border-left: 4px solid #4caf7d;
     margin: 0 0 1em 2px;
     padding: 1px;
     padding-left: 1em;
@@ -94,6 +94,9 @@ sup a {
     border-left: 1px solid #4caf7d;
     border-right: 1px solid #4caf7d;
 }
+dl > dt {
+    font-weight: bold;
+}
 table {
     border-collapse: collapse;
     border-spacing: 0;
@@ -113,9 +116,10 @@ td, th {
 }
 th {
     font-weight: 700;
-    background-color: #46c19d;
     color: white;
-    border: 2px solid #139871;
+    filter: brightness(110%);
+    border: 2px solid #4caf7d;
+    background-color: #4caf7d;
 }
 td {
     background-color: #fbfbfb;
@@ -207,6 +211,9 @@ pre[class*="language-"].line-numbers > code {
     justify-content: space-between;
     padding-right: 1em;
     word-break: keep-all;
+}
+#navbar h2 {
+    color: #4caf7d;
 }
 #navbar a{
     margin: 5px;
@@ -306,6 +313,7 @@ pre[class*="language-"].line-numbers > code {
     /* width: var(--doc-sidebar-width); */
     transition: opacity 50ms;
     padding-top: 0;
+    z-index: 1;
 }
 #sidebar ul {
     padding-inline-start: 20px;
@@ -313,11 +321,11 @@ pre[class*="language-"].line-numbers > code {
 }
 #sidebar > ul {
     padding-inline-start: 0;
-    overflow-x: hidden;
     padding: .5rem;
     display: block;
     padding-bottom: 3em;
     margin: 0;
+    overflow-y: auto;
 }
 #sidebar ul .show{
     /* display: block; */ /* js instead, just reserve this item*/
@@ -339,6 +347,7 @@ pre[class*="language-"].line-numbers > code {
 #sidebar li {
     list-style: none;
     margin: 2px 0;
+    position: relative;
 }
 #sidebar li > a {
     display: flex;
@@ -414,7 +423,6 @@ pre[class*="language-"].line-numbers > code {
 }
 #sidebar .tip {
     position: absolute;
-    background: #4caf7d;
     color: white;
     left: 300px;
     box-shadow: 0px 0px 8px 0px rgba(0, 0, 0, 0.19);
@@ -426,6 +434,7 @@ pre[class*="language-"].line-numbers > code {
     transition: 0.4s;
     visibility: hidden;
     opacity: 0;
+    background: #4caf7d;
 }
 #sidebar li > a:hover+.tip, #sidebar .tip:hover {
     visibility: visible;
@@ -435,14 +444,15 @@ pre[class*="language-"].line-numbers > code {
     margin: 0.4em;
 }
 .blog_tags {
-    padding: 0.6em 0 0 0;
     text-align: center;
+    margin-top: 1em;
 }
 .blog_tags > span {
-    border: 1px solid #98d8b8;
     border-radius: 0.2em;
     padding: 0.2em;
     margin: 0.4em;
+    filter: brightness(120%);
+    border: 1px solid #4caf7d;
 }
 #blog_list > ul {
     padding-left: 0;
@@ -472,6 +482,7 @@ html[lang^=zh] #article_content #blog_list h2:before {
 }
 .blog_cover {
     text-align: center;
+    margin-top: 1em;
 }
 .blog_cover > img {
     width: 100%;
@@ -578,6 +589,7 @@ html[lang^=zh].heading_no_counter #toc a.node-name--H2:before {
     justify-content: space-between;
     line-height: 2em;
     margin: auto;
+    overflow-x: auto;
 }
 #content_body h1 {
     line-height: initial;
@@ -672,7 +684,7 @@ html[lang^=zh].heading_no_counter #article_content h4:before {
     margin: 5px;
     padding: 8px;
     border-radius: 5px;
-    color: #d5ffea;
+    color: #ffffffcc;
     font-size: 0.9em;
     background-color: #4caf7d;
 }
@@ -931,7 +943,7 @@ a.toc-link {
 }
 
 .is-collapsible {
-	max-height: 1000px;
+	/* max-height: 1000px; */
 	overflow: hidden;
 	transition: all 300ms ease-in-out
 }
@@ -1020,14 +1032,12 @@ a.toc-link {
     align-items: normal;
     border: 0.2em solid #ebedf0;
     border-radius: 0.5em;
-    width: 100%;
     margin: 0.5em 0;
 }
 .tabset-title {
     font-size: medium;
     font-weight: 500;
     padding: 0.5em 1em;
-    width: 100%;
 }
 .tabset-content {
     display: flex;
@@ -1073,19 +1083,53 @@ details {
     align-items: normal;
     border: 0.2em solid #ebedf0;
     border-radius: 0.5em;
-    width: 100%;
     margin: 0.5em 0;
+    transition: 0.4s;
 }
 details > summary {
     font-size: medium;
     font-weight: 500;
     padding: 0.5em 1em;
-    width: 100%;
     cursor: pointer;
 }
-details > .details-content {
+details > summary {
+    list-style-type:none;
+    position: relative;
+    padding-left: 2em;
+}
+details > summary:before {
+    display:inline-block;
+    content: url("/static/image/theme_default/array.svg");
+    transform:rotate(90deg);
+    transition: 0.4s;
+    left: 0.5em;
+    position: absolute;
+    top: 0.45rem;
+}
+details[open] > summary:before {
+    transform:rotate(180deg);
+    top: 0.35rem;
+}
+details[open] summary ~ * {
+    animation: sweep .4s ease-in-out;
+  }
+@keyframes sweep {
+0%    {opacity: 0; margin-left: -10px}
+100%  {opacity: 1; margin-left: 0px}
+}
+details > .details-content, details > div {
     padding: 1em;
     background-color: #0000000d;
+}
+
+#update_history {
+    overflow-x: auto;
+}
+#update_history details > div {
+    padding: 0;
+}
+#update_history details {
+    width: fit-content;
 }
 
 /* mobile phone */
