@@ -148,12 +148,13 @@ pre[class*="language-"].line-numbers > code {
     cursor: pointer;
     transition: 0.2s;
     background: #4caf7d;
+    box-shadow: 1px 1px 2px 0px #4caf7d;
 }
 .btn:hover,
 #page_content .btn:hover,
 #content_body .btn:hover {
     background: #4caf7d;
-    box-shadow: 1px 1px 5px 0px green;
+    box-shadow: 1px 1px 8px 0px #4caf7d;
 }
 .btn:visited,
 #page_content .btn:visited,
@@ -257,12 +258,18 @@ pre[class*="language-"].line-numbers > code {
     visibility: hidden;
     margin-top: -5px;
     z-index: 101;
+    transition: 0.2s;
 }
 #navbar .sub_items ul:hover {
     visibility: visible;
 }
 #navbar .sub_items ul li {
     display: block;
+}
+
+#navbar .sub_items ul ul {
+    left: 100%;
+    top: 0;
 }
 
 
@@ -609,6 +616,9 @@ html[lang^=zh].heading_no_counter #toc a.node-name--H2:before {
     object-fit: contain;
     cursor: zoom-in;
 }
+#content_body video {
+    max-width: 100%;
+}
 
 /* add numbers for titles */
 #article_content {
@@ -936,6 +946,8 @@ h2:hover > .anchor, h3:hover > .anchor, h4:hover > .anchor, h5:hover > .anchor {
 }
 #toc_content > .toc-list > .toc-list-item {
     border-left: 2px solid #f1f1f1;
+    padding: 0.1em 0.1em;
+    line-height: 1.2em;
 }
 
 a.toc-link {
@@ -1172,6 +1184,10 @@ details > .details-content, details > div {
         left: 0;
         right: auto;
     }
+    #navbar .sub_items ul ul {
+        left: 0;
+        top: 3em;
+    }
     #sidebar_wrapper {
         position: fixed;
         top: 0;
@@ -1254,9 +1270,6 @@ details > .details-content, details > div {
     }
     #footer_top > ul {
         flex-direction: column;
-    }
-    .md_page #page_content > div {
-        margin: 1.5em;
     }
     #article_tools {
         width: 100%;
